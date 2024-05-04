@@ -1,0 +1,252 @@
+
+*:focus {
+    outline: none;
+}
+.mobile_mockup img{
+    padding: 10px 0;
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+.chatroom_header_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px 15px 0px;
+    border-bottom: 1px solid #E6E6E6;
+    box-shadow: 0px 4px 4px 0px rgba(230, 230, 230, 0.25);
+}
+
+.chatroom_header_box_left{
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+
+#chatroom_header_box_left_ai_img {
+    padding: 0px 20px 0px 30px;
+    width: 50px;
+    height: 50px;
+}
+
+.chatroom_header_texts{
+    display: block;
+   
+}
+
+.chatroom_header_texts h1{
+    color: #000;
+    font-family: SUIT;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0px;
+    padding-bottom: 3px;
+}
+
+
+.chatroom_header_texts h2{
+
+    color: #8D8D8D;
+    font-family: SUIT;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0px;
+  
+}
+.chatroom_icons {
+    display: flex;
+    gap: 10px;
+    padding-right: 10px;
+    align-items: center;
+}
+.chatroom_icons img{
+    width: 35px;
+    height:35px;
+}
+
+#chat-container {
+    width: 500px;
+    margin: auto;
+    box-shadow: 0px 4px 6.2px 7px rgba(231, 231, 231, 0.25);
+    padding: 10px 0px;
+    border-radius: 12px;
+}
+
+#chat-window {
+    height: 73vh;
+    overflow-y: auto;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    background: #F2F3F7;
+    border: none;
+    color: #444;
+    font-family: Poppins;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160%; /* 28.8px */
+}
+
+#text_send {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 100px;
+    background: #F2F3F7;
+    border: none;
+    margin: 0px 5px;
+}
+
+button {
+    width: 15%;
+    padding: 10px;
+    border-radius: 50px;
+    background: #FFF;
+    border: none;
+
+    color: rgba(155, 155, 155, 0.80);
+
+    font-family: Poppins;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160%; /* 28.8px */
+
+}
+
+.user-message {
+    display: flex;
+    justify-content: end;
+    padding: 11px 15px;
+    margin: 20px 30px;
+    border-radius: 50px 10px 50px 50px;
+    background: #3855ff;
+    max-width: 65%;
+    float: right;
+
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 28.8px */
+    
+}
+
+.bot-message {
+    display: flex;
+    word-break: keep-all;
+    padding: 11px 15px;
+    border-radius: 25px;
+    border: 1px solid #EDEBEB;
+    background: #FFF;
+    box-shadow: 0px 4px 6.2px 7px rgba(231, 231, 231, 0.25);
+    max-width: 65%;
+    width: fit-content;
+
+    color: #444;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 28.8px */
+}
+
+.user-profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    margin-left: 9px;
+    margin-right: 15px;
+}
+
+.user-profile {
+    display: flex;
+    justify-content: end;
+    padding: 15px 0px 0px 0px;
+    align-items: center;
+    width: 100%;
+    color: #282828;
+
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 124%;
+}
+
+.bot-message-container{
+    display: flex;
+    width: 85%;
+    align-items: end;
+    margin: 15px 0px;
+    
+    color: #282828;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 124%;
+}
+
+.bot-profile-image {
+    padding: 0px 15px;
+    height: 30px;
+    border-radius: 100px;
+}
+
+
+
+
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+    min-height: 30px;
+    width: 90%;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #999;
+    margin: 0 2px;
+    animation: blink 1.4s infinite;
+    animation-delay: calc(0.2s * var(--dot));
+}
+
+.typing-dot:nth-child(1) { --dot: 1; }
+.typing-dot:nth-child(2) { --dot: 2; }
+.typing-dot:nth-child(3) { --dot: 3; }
+
+.time-label {
+    padding: 25px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+
+
+color: #ACACAC;
+font-family: SUIT;
+font-size: 15.37px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot UI</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div id="chat-container">
+        <div class="chatroom_header"> 
+            <div class="mobile_mockup"><img src="/static/mobie_head_icon.png" alt="mobile_mockup"></div>
+            <div class="chatroom_header_box">
+                <div class="chatroom_header_box_left">
+                    <a href="javascript:logout()"><img src="/static/icon_arrow_left.png" alt="ai_profile img"  width = 25px height = 20px></a>
+                     
+                    <img src="/static/ai_friend.png" alt="" width = 62px height = 62px id="chatroom_header_box_left_ai_img">
+                        <div class="chatroom_header_texts">
+                            <h1>심리챗봇</h1>
+                            <h2>현재 활동 중</h2>
+                        </div>
+                </div>
+                   
+                <div class="chatroom_icons">
+                    <a href="#"><img src="/static/icon_phone.png" alt="phone img"></a>
+                    <a href="#"><img src="/static/icon_camera.png" alt="camera img" ></a>
+                    <a href="#"><img src="/static/icon_info.png" alt="info img" ></a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div id="chat-window">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div id="text_send"> 
+            <input type="text" id="user-input" placeholder="메세지를 입력해주세요. " autocomplete='off' onfocus="this.placeholder=''" onblur="this.placeholder='메세지를 입력해주세요.'">
+            <button onclick="sendMessage()">전송</button> 
+        </div>
+
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+}
+
+
+/* 로그인 ui css */
+
+.login-container {
+    background-color: white;
+    width: 100vw; /* 전체 뷰포트 너비 */
+    height: 100vh; /* 전체 뷰포트 높이 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 내용물 수평 중앙 정렬 */
+    align-items: center; /* 내용물 수직 중앙 정렬 */
+    padding: 0 20px; /* 상하 패딩 제거, 좌우 패딩은 유지 */
+    text-align: center;
+    padding: 0 20px;
+    
+    
+}
+
+h1 {
+    font-size: 25px;
+    color: black;
+    margin: 0px;
+
+
+}
+
+h2 {
+    font-size: 15px;
+    color: #333;
+    margin: 10px 0;
+    margin-bottom: 30px;
+}
+
+.login-form .input-group {
+    box-sizing: border-box; 
+    margin-bottom: 15px;
+    
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%; /* 너비를 부모 요소에 맞추고, box-sizing으로 인해 패딩과 테두리 포함 */
+    padding: 10px; /* 내부 패딩 적용 */
+    margin-bottom: 5px; /* 입력 필드 사이의 마진 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.options label {
+    color: #333;
+}
+
+.options a.forgot-password {
+    color: #214EE7;
+    text-decoration: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #214EE7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+.additional-links {
+    margin-top: 20px;
+}
+
+.additional-links a {
+    color: #214EE7;
+    text-decoration: none;
+}
+
+.additional-links a:hover {
+    text-decoration: underline;
+}
