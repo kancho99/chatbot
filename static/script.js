@@ -105,7 +105,7 @@ function sendMessage() {
 
         // 프로필 이미지를 생성하고 컨테이너에 추가
         const botProfileImage = document.createElement("img");
-        botProfileImage.src = "/static/ai_friend.png";
+        botProfileImage.src = "/static/imgs/ai_friend.png";
         botProfileImage.classList.add("bot-profile-image");
         botMessageContainer.appendChild(botProfileImage);
 
@@ -141,7 +141,7 @@ function sendMessage() {
                 botMessageContainer.classList.add("bot-message-container");
 
                 const botProfileImage = document.createElement("img");
-                botProfileImage.src = "/static/ai_friend.png";
+                botProfileImage.src = "/static/imgs/ai_friend.png";
                 botProfileImage.classList.add("bot-profile-image");
                 botMessageContainer.appendChild(botProfileImage);
 
