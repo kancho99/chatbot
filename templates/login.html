@@ -39,5 +39,19 @@
         {% endwith %}
     </script>
 
+    <script>
+        // 페이지가 로드된 후에 플래시 메시지를 제거
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const flashMessages = document.querySelectorAll('.flashes');
+            flashMessages.forEach(flashMessage => {
+                setTimeout(() => {
+                    flashMessage.remove();
+                }, 5000); // 5초 후에 메시지 제거
+            });
+        });
+    </script>
+
+
+
 </body>
 </html>

@@ -2,44 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Chatbot UI</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div id="chat-container">
-        <div class="chatroom_header"> 
-            <div class="mobile_mockup"><img src="/static/imgs/mobie_head_icon.png" alt="mobile_mockup"></div>
-            <div class="chatroom_header_box">
-                <div class="chatroom_header_box_left">
-                    <a href="javascript:logout()"><img src="/static/imgs/icon_arrow_left.png" alt="ai_profile img"  width = 25px height = 20px></a>
-                     
-                    <img src="/static/imgs/ai_friend.png" alt="" width = 62px height = 62px id="chatroom_header_box_left_ai_img">
-                        <div class="chatroom_header_texts">
-                            <h1>심리챗봇</h1>
-                            <h2>현재 활동 중</h2>
-                        </div>
-                </div>
-                   
-                <div class="chatroom_icons">
-                    <a href="#"><img src="/static/imgs/icon_phone.png" alt="phone img"></a>
-                    <a href="#"><img src="/static/imgs/icon_camera.png" alt="camera img" ></a>
-                    <a href="#"><img src="/static/imgs/icon_info.png" alt="info img" ></a>
-                </div>
-
-            </div>
+        <div id="nav-bar_black" onclick="toggleNavBar()"></div>
+        <div id="nav-bar">
+            <a href="#">프로필</a>
+            <a href="#" onclick="confirmDeletion()">대화 내역 삭제하기</a>
         </div>
 
-
+        <div class="chatroom_header"> 
+            <div class="mobile_mockup"><span id="current-time"></span><img src="/static/imgs/mobie_head_icon.png" alt="mobile_mockup"></div>
+            <div class="chatroom_header_box">
+                <div class="chatroom_header_box_left">
+                    <a href="javascript:logout()"><img src="/static/imgs/icon_arrow_left.png" alt="ai_profile img" width = 25px height = 20px></a>
+                    <img src="/static/imgs/ai_friend.png" alt="" width = 62px height = 62px id="chatroom_header_box_left_ai_img">
+                    <div class="chatroom_header_texts">
+                        <h1>심리챗봇</h1>
+                    </div>
+                </div>
+                <div class="chatroom_icons">
+                    <a href="/calling"><img src="/static/imgs/icon_phone.png" alt="phone img"></a>
+                    <a href="#"><img src="/static/imgs/icon_camera.png" alt="camera img"></a>
+                    <a href="#" onclick="toggleNavBar()"><img src="/static/imgs/icon_info.png" alt="info img"></a>
+                </div>
+            </div>
+        </div>
 
         <div id="chat-window">
             <!-- Messages will be displayed here -->
         </div>
+        
         <div id="text_send"> 
             <input type="text" id="user-input" placeholder="메세지를 입력해주세요. " autocomplete='off' onfocus="this.placeholder=''" onblur="this.placeholder='메세지를 입력해주세요.'">
             <button onclick="sendMessage()">전송</button> 
         </div>
-
     </div>
     <script src="/static/script.js"></script>
+
+    <script>
+        // Python에서 전달된 flash 메시지를 JavaScript에서 처리합니다.
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    alert("{{ message }}");
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+
+    <script>
+         // 페이지가 로드된 후에 플래시 메시지를 제거
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const flashMessages = document.querySelectorAll('.flashes');
+            flashMessages.forEach(flashMessage => {
+                setTimeout(() => {
+                    flashMessage.remove();
+                }, 5000); // 5초 후에 메시지 제거
+            });
+        });
+    </script>
+
 </body>
 </html>

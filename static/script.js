@@ -54,6 +54,7 @@ function sendMessage() {
     if (!lastMessageTime || (currentTime - lastMessageTime) > 1800000) { // 30분 후 시간이 레이블이 표시됩니다
         displayTimeLabel(currentTime);
     }
+    
     lastMessageTime = currentTime; // 시간 업데이트
 
     /*
@@ -125,18 +126,27 @@ function sendMessage() {
 }
 
   // 채팅기록 저장
-
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/history')
         .then(response => response.json())
         .then(data => {
             const chatWindow = document.getElementById("chat-window");
             data.forEach(chat => {
+                const messageTime = new Date(chat.timestamp);
+
+                // 이전 메시지 시간과 비교하여 시간 레이블 표시
+                if (!lastMessageTime || (messageTime - lastMessageTime) > 1800000) { // 30분 후 시간이 레이블이 표시됩니다
+                    displayTimeLabel(messageTime);
+                }
+                lastMessageTime = messageTime; // 시간 업데이트
+
+                // 사용자 메시지
                 const userMessageElement = document.createElement("div");
                 userMessageElement.textContent = chat.user_input;
                 userMessageElement.classList.add("user-message");
                 chatWindow.appendChild(userMessageElement);
 
+                // 챗봇 메시지
                 const botMessageContainer = document.createElement("div");
                 botMessageContainer.classList.add("bot-message-container");
 
@@ -159,4 +169,126 @@ function sendMessage() {
         });
 });
 
+
+
+// 상단 왼쪽 시간
+
+function updateTime() {
+    const timeElement = document.getElementById('current-time');
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    timeElement.innerText = `${hours}:${minutes}`;
+}
+function startClock() {
+    updateTime(); // 첫 실행 시에 업데이트합니다.
+    setInterval(updateTime, 600); // 매 분마다 업데이트합니다.
+}
+
+window.onload = startClock;
+
+
+
+// 자동 메시지
+let inactivityTimeout;
+let autoMsgCount = 0;
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimeout);
+    inactivityTimeout = setTimeout(sendPeriodicBotMessages, 30000); // 20초 간 메시지 미전송 시 작동
+}
+
+function displayBotMessage(message) {
+    if (message) {
+        const chatWindow = document.getElementById("chat-window");
+        const botMessageContainer = document.createElement("div");
+        botMessageContainer.classList.add("bot-message-container");
+
+        const botProfileImage = document.createElement("img");
+        botProfileImage.src = "/static/imgs/ai_friend.png";
+        botProfileImage.classList.add("bot-profile-image");
+        botMessageContainer.appendChild(botProfileImage);
+
+        const botMessage = document.createElement("div");
+        botMessage.textContent = message;
+        botMessage.classList.add("bot-message");
+        botMessageContainer.appendChild(botMessage);
+
+        chatWindow.appendChild(botMessageContainer);
+        scrollToBottom();
+    }
+}
+
+function sendInitialBotMessage() {
+    fetch('/init-message')
+        .then(response => response.json())
+        .then(data => {
+            displayBotMessage(data.response);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// 자동 메시지 전송 함수
+function sendPeriodicBotMessages() {
+    if (autoMsgCount < 2) {
+        fetch('/periodic-message')
+            .then(response => response.json())
+            .then(data => {
+                if (data.response) {
+                    displayBotMessage(data.response);
+                    autoMsgCount++;
+                }
+                resetInactivityTimer(); // 메시지를 보낸 후 타이머를 재설정
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+// 초기 메시지를 보냄
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('/init-message')
+        .then(response => response.json())
+        .then(data => {
+            displayBotMessage(data.response);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
+
+// 메시지 삭제 확인 메시지 발송
+
+function confirmDeletion() {
+    if (confirm('정말 대화 내역을 삭제하시겠습니까?')) {
+        fetch('/delete-history', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'  // CSRF 토큰을 포함해야 합니다
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert('대화 기록이 삭제되었습니다.');
+                window.location.reload();  // 페이지를 새로 고침하여 변경사항을 반영
+            } else {
+                alert('대화 기록을 삭제하는 중 문제가 발생했습니다.');
+            }
+        });
+    }
+}
+
+
+// 토글 네비게이션
+
+function toggleNavBar() {
+    const navBar = document.getElementById('nav-bar');
+    const navBarBlack = document.getElementById('nav-bar_black');
+    navBar.classList.toggle('active');
+    navBarBlack.classList.toggle('active');
+}
 

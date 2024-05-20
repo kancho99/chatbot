@@ -126,6 +126,10 @@ def home():
     
     return render_template('index.html')
 
+@app.route('/calling')
+def calling():
+    return render_template('calling.html')
+
 # Chatbot route
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -134,14 +138,14 @@ def chat():
     user_input = data.get('user_input')
 
     conversation_history = user_conversations.get(user_id, [
-        {"role": "system", "content": "You are a qualified mental health counselor..."}
+        {"role": "system", "content": "You are a qualified mental health counselor...Your responses should be a sentence or two, unless the user’s request requires reasoning or long-form outputs. try to keep up the conversation and make the user talk or answer to you."}
     ])
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o",  # gpt-4o, gpt-4-turbo, or gpt-3.5-turbo
         messages=conversation_history + [{"role": "user", "content": user_input}]
     )
-
+ 
     chatbot_response = response.choices[0].message.content
 
         # 대화 내역을 데이터베이스에 저장
@@ -157,7 +161,66 @@ def chat():
 
     return jsonify({"response": chatbot_response})
 
+  # 자동 메시지
+# 자동 메시지 카운트 플래그 추가
+user_auto_msg_count = {}
+
+@app.route('/init-message', methods=['GET'])
+@login_required
+def init_message():
+    user_id = current_user.id
+    user_auto_msg_count[user_id] = 0  # 플래그 초기화
+    bot_message = gpt_text_generation()
+    return jsonify({"response": bot_message})
+
+@app.route('/periodic-message', methods=['GET'])
+@login_required
+def periodic_message():
+    user_id = current_user.id
+    if user_auto_msg_count.get(user_id, 0) < 1:
+        bot_message = gpt_text_generation()
+        user_auto_msg_count[user_id] = user_auto_msg_count.get(user_id, 0) + 1
+        return jsonify({"response": bot_message})
+    else:
+        return jsonify({"response": ""})  # 메시지 전달하지 않음
+
+def gpt_text_generation():
+    messages = [
+        {"role": "system", "content": "You are a qualified mental health counselor."},
+        {"role": "user", "content": "pretend that you are trying to make me talk. you are texting me. speak korean.make the text as short as possible."}
+    ]
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+    )
+    return response.choices[0].message.content
+
+@app.route('/reset-auto-msg-count', methods=['POST'])
+@login_required
+def reset_auto_msg_count():
+    user_id = current_user.id
+    user_auto_msg_count[user_id] = 0
+    return "", 204  # No content
+
+# 채팅 기록 삭제
+@app.route('/delete-history', methods=['POST'])
+@login_required
+def delete_history():
+    user_id = current_user.id
+    try:
+        Chat.query.filter_by(user_id=user_id).delete()
+        db.session.commit()
+        flash('대화 기록이 성공적으로 삭제되었습니다.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('대화 기록 삭제 중 오류가 발생했습니다.', 'error')
+    return redirect(url_for('home'))
+
+
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+

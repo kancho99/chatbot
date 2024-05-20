@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot UI</title>
+    <link rel="stylesheet" href="/static/calling_style.css">
+</head>
+<body>
+    <div id="chat-container">
+        <div class="chatroom_header"> 
+            <div class="mobile_mockup"><span id="current-time"></span><img src="/static/imgs/mobie_head_icon.png" alt="mobile_mockup"></div>
+            <div class="chatroom_header_box">
+                <div class="chatroom_header_box_left">
+                    <a href="javascript:logout()"><img src="/static/imgs/icon_arrow_left.png" alt="ai_profile img"  width = 25px height = 20px></a>
+                     
+                    <img src="/static/imgs/ai_friend.png" alt="" width = 62px height = 62px id="chatroom_header_box_left_ai_img">
+                        <div class="chatroom_header_texts">
+                            <h1>심리챗봇</h1>
+                            <h2>현재 활동 중</h2>
+                        </div>
+                </div>
+                   
+                <div class="chatroom_icons">
+                    <a href="#"><img src="/static/imgs/icon_phone.png" alt="phone img"></a>
+                    <a href="#"><img src="/static/imgs/icon_camera.png" alt="camera img" ></a>
+                    <a href="#"><img src="/static/imgs/icon_info.png" alt="info img" ></a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div id="call-window">
+          
+        </div>
+        <div id="call_send"> 
+      
+        </div>
+
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
