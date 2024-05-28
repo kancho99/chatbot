@@ -7,36 +7,35 @@
 </head>
 <body>
     <div id="chat-container">
+        <div id="nav-bar_black" onclick="toggleNavBar()"></div>
+        <div id="nav-bar">
+            <a href="#">프로필</a>
+            <a href="#" onclick="confirmDeletion()">대화 내역 삭제하기</a>
+        </div>
         <div class="chatroom_header"> 
-            <div class="mobile_mockup"><span id="current-time"></span><img src="/static/imgs/mobie_head_icon.png" alt="mobile_mockup"></div>
-            <div class="chatroom_header_box">
-                <div class="chatroom_header_box_left">
-                    <a href="javascript:logout()"><img src="/static/imgs/icon_arrow_left.png" alt="ai_profile img"  width = 25px height = 20px></a>
-                     
-                    <img src="/static/imgs/ai_friend.png" alt="" width = 62px height = 62px id="chatroom_header_box_left_ai_img">
-                        <div class="chatroom_header_texts">
-                            <h1>심리챗봇</h1>
-                            <h2>현재 활동 중</h2>
-                        </div>
-                </div>
-                   
-                <div class="chatroom_icons">
-                    <a href="#"><img src="/static/imgs/icon_phone.png" alt="phone img"></a>
-                    <a href="#"><img src="/static/imgs/icon_camera.png" alt="camera img" ></a>
-                    <a href="#"><img src="/static/imgs/icon_info.png" alt="info img" ></a>
-                </div>
-
+            <div class="mobile_mockup"><img src="/static/imgs/calling_status_icon.png" alt="mobile_mockup"><img src="/static/imgs/mobile_head_icon_white.png" alt="mobile_mockup"></div>
+            <div class="call_ui_nav">
+                <a href="javascript:logout()"><img src="/static/imgs/calling_arrow_icon.png" alt="arrow_icon_img"  width = 25px height = 20px></a>
+                <a href="#" onclick="toggleNavBar()"><img src="/static/imgs/calling_info_icon.png" alt="info_icon_img"  width = 25px height = 25px></a>       
+            </div>
+            <div class="call_ui_content">
+                <img src="/static/imgs/calling_ai_profile.png" alt="" width = 62px height = 62px id="chatroom_header_box_left_ai_img">
+                <h1>심리챗봇</h1>
+                <h2>현재 활동 중</h2>
+                <img src="/static/imgs/calling_ai_blur.png" alt="" width = 320px  >
             </div>
         </div>
 
 
+        <div id="call-footer-nav">
+            <div id="call-footer-nav-content">
+                <a href="javascript:logout()"><img src="/static/imgs/calling_video-disabled.png" alt="arrow_icon_img"  width = 28px ></a>
+                <a href="javascript:logout()"><img src="/static/imgs/calling_mic_icon.png" alt="info_icon_img"  width = 22px ></a>      
+                <a href="javascript:logout()"><img src="/static/imgs/calling_export_icon.png" alt="arrow_icon_img"  width = 28px></a>
+                <a href="javascript:logout()"><img src="/static/imgs/calling_endcall_icon.png" alt="info_icon_img"  width = 45px></a>      
+            </div>
+        </div>
 
-        <div id="call-window">
-          
-        </div>
-        <div id="call_send"> 
-      
-        </div>
 
     </div>
     <script src="/static/script.js"></script>

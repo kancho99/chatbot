@@ -99,6 +99,7 @@ function sendMessage() {
     .then(data => {
         // 응답을 받으면 타이핑 인디케이터 제거
         typingIndicator.remove();
+        
 
         // 봇 메시지를 포함하는 컨테이너 생성
         const botMessageContainer = document.createElement("div");
@@ -292,3 +293,9 @@ function toggleNavBar() {
     navBarBlack.classList.toggle('active');
 }
 
+
+
+
+
+
+// calling javascript start

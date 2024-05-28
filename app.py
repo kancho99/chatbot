@@ -142,7 +142,7 @@ def chat():
     ])
 
     response = client.chat.completions.create(
-        model="gpt-4o",  # gpt-4o, gpt-4-turbo, or gpt-3.5-turbo
+        model="gpt-3.5-turbo",  # gpt-4o, gpt-4-turbo, or gpt-3.5-turbo
         messages=conversation_history + [{"role": "user", "content": user_input}]
     )
  
